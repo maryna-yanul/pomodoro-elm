@@ -29,13 +29,18 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
     color: #fff;
   }
 }
-.clean-timer {
-  .custom-btn {
-    width: 100%;
+
+.clean-status {
+  text-align: right;
+  img {
+    width: 30px;
+    margin-left: 15px;
+    cursor: pointer;
   }
 }
 
 .custom-btn {
+  width: 100%;
   color: #fff;
   background-color: #000;
   border-color: #000;

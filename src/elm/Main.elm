@@ -43,11 +43,14 @@ view model =
       headerComponent model
       , timer model
       , counter model
-      , div[] [
-        customButton model
-      ]
-      , ul[ class "settings"] [
-        li[] [
+      , ul [ class "settings"] [
+        li [ class "clean-status" ] [
+          span[] [
+            ( text "Clean Status" )
+          ]
+          , img [ src "static/img/clean.svg" ] []
+        ]
+        , li[] [
           span[] [
             ( text "Pomodoro Length" )
           ]
@@ -71,7 +74,7 @@ view model =
           ]
           , input [ type_ "number", placeholder "0" ] []
         ]
-        , div[ class "clean-timer" ] [
+        , div[] [
           customButton model
         ]
       ]
