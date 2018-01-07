@@ -4,7 +4,10 @@ import Html.Attributes exposing (..)
 import Html.Events exposing ( onClick )
 
 -- component import example
-import Components.Hello exposing ( hello )
+import Components.HeaderComponent exposing ( headerComponent )
+import Components.Timer exposing ( timer )
+import Components.Counter exposing ( counter )
+import Components.CustomButton exposing ( customButton )
 
 
 -- APP
@@ -35,17 +38,41 @@ update msg model =
 -- CSS can be applied via class names or inline style attrib
 view : Model -> Html Msg
 view model =
-  div [ class "container", style [("margin-top", "30px"), ( "text-align", "center" )] ][    -- inline CSS (literal)
-    div [ class "row" ][
-      div [ class "col-xs-12" ][
-        div [ class "jumbotron" ][
-          img [ src "static/img/elm.jpg", style styles.img ] []                             -- inline CSS (via var)
-          , hello model                                                                     -- ext 'hello' component (takes 'model' as arg)
-          , p [] [ text ( "Elm Webpack Starter" ) ]
-          , button [ class "btn btn-primary btn-lg", onClick Increment ] [                  -- click handler
-            span[ class "glyphicon glyphicon-star" ][]                                      -- glyphicon
-            , span[][ text "FTW!" ]
+  div [ style [( "text-align", "center" )] ][
+    div[] [
+      headerComponent model
+      , timer model
+      , counter model
+      , div[] [
+        customButton model
+      ]
+      , ul[ class "settings"] [
+        li[] [
+          span[] [
+            ( text "Pomodoro Length" )
           ]
+          , input [ type_ "number", placeholder "0" ] []
+        ]
+        , li[] [
+          span[] [
+            ( text "Pomodoro Break Length" )
+          ]
+          , input [ type_ "number", placeholder "0" ] []
+        ]
+        , li[] [
+          span[] [
+            ( text "Long Break Length" )
+          ]
+          , input [ type_ "number", placeholder "0" ] []
+        ]
+        , li[] [
+          span[] [
+            ( text "Target Pomodoros Per Day" )
+          ]
+          , input [ type_ "number", placeholder "0" ] []
+        ]
+        , div[ class "clean-timer" ] [
+          customButton model
         ]
       ]
     ]
@@ -56,8 +83,5 @@ view model =
 styles : { img : List ( String, String ) }
 styles =
   {
-    img =
-      [ ( "width", "33%" )
-      , ( "border", "4px solid #337AB7")
-      ]
+    img = [ ( "width", "200px" ) ]
   }

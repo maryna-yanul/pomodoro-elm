@@ -3,3 +3,87 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 
 // can add Boostrap overrides, additional Sass/CSS below...
+
+.header-title {
+  color: red;
+}
+.timer {
+  font-size: 100px;
+  font-weight: bold;
+}
+.pomodoro-counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+
+  background-image: url('/static/img/tomato.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  span {
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+  }
+}
+.clean-timer {
+  .custom-btn {
+    width: 100%;
+  }
+}
+
+.custom-btn {
+  color: #fff;
+  background-color: #000;
+  border-color: #000;
+  display: inline-block;
+  padding: 10px 60px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  margin-top: 30px;
+  &:hover {
+    background-color: #c9302c;
+    border-color: #ac2925;
+  }
+  &:active, &:focus {
+    outline: none;
+  }
+}
+
+.settings {
+  text-align: left;
+  background-color: #eee;
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: 30px;
+  li {
+    list-style: none;
+    padding: 5px;
+  }
+  input {
+    float: right;
+    border: none;
+    text-align: center;
+    width: 130px;
+  }
+}
