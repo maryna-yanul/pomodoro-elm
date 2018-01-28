@@ -5,7 +5,7 @@ import Html.Events exposing ( onClick )
 
 -- component import example
 import Components.HeaderComponent exposing ( headerComponent )
-import Components.Timer exposing ( timer )
+import Components.Timer
 import Components.Counter exposing ( counter )
 import Components.CustomButton exposing ( customButton )
 
@@ -13,24 +13,45 @@ import Components.CustomButton exposing ( customButton )
 -- APP
 main : Program Never Model Msg
 main =
-  Html.beginnerProgram { model = model, view = view, update = update }
+  Html.program
+    { init = init
+    , subscriptions = subscriptions
+    , update = update
+    , view = view }
 
 
 -- MODEL
-type alias Model = Int
+type alias Model = { timer : Components.Timer.Model }
 
-model : Model
-model = 0
+initialModel : Components.Timer.Model -> Model
+initialModel timer =
+  { timer = timer }
 
+init : (Model, Cmd Msg)
+init =
+  let
+    (timer, timerMsg) = Components.Timer.init
+    model = initialModel timer
+  in
+    ( model
+    , Cmd.map TimerMsg timerMsg
+    )
+
+-- SUBSCRIPTIONS
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  Sub.none
 
 -- UPDATE
-type Msg = NoOp | Increment
+type Msg
+  = NoOp
+  | TimerMsg Components.Timer.Msg
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    NoOp -> model
-    Increment -> model + 1
+    NoOp -> (model, Cmd.none)
+    TimerMsg m -> (model, Cmd.none)
 
 
 -- VIEW
@@ -40,9 +61,9 @@ view : Model -> Html Msg
 view model =
   div [ style [( "text-align", "center" )] ][
     div[] [
-      headerComponent model
-      , timer model
-      , counter model
+      headerComponent 42
+      , Components.Timer.timer model.timer
+      , counter 42
       , ul [ class "settings"] [
         li [ class "clean-status" ] [
           span[] [
@@ -75,7 +96,7 @@ view model =
           , input [ type_ "number", placeholder "0" ] []
         ]
         , div[] [
-          customButton model
+          customButton 42
         ]
       ]
     ]

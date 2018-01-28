@@ -4,7 +4,6 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import String
 
--- hello component
 counter : Int -> Html a
 counter model =
   div
